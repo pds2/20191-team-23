@@ -12,8 +12,8 @@ static bool Intersect(Vector& a, Vector& endA, Vector& b){
 
 namespace physics{
     bool AABB(Entity* a, Entity* b){
-        Vector endA(a->GetPosition()->x + a->GetScale()->x, a->GetPosition()->y + a->GetScale()->y);
-        Vector endB(b->GetPosition()->x + b->GetScale()->x, b->GetPosition()->y + b->GetScale()->y);
+        Vector endA = *a->GetPosition() + *a->GetScale();
+        Vector endB = *b->GetPosition() + *b->GetScale();
 
         if (Intersect(*a->GetPosition(), endA, *b->GetPosition())){
             return true;

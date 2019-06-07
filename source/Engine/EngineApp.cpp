@@ -113,7 +113,6 @@ std::vector<Entity*> EngineApp::GetCollisions(Entity* e, Layer layer){
 bool EngineApp::Collided(Entity* e, Layer layer){
     for (Entity* other : m_entities){
         if (other->GetLayers()->Intersect(layer)){
-            std::cout << "testing...\n";
             if (physics::AABB(e, other)){
                 return true;
             }
