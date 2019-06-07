@@ -1,19 +1,27 @@
 #include "EngineApp.h"
 
-EngineApp::EngineApp(){
+EngineApp::EngineApp(std::string name){
     // INit SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
         throw 1;
 
-    m_window = SDL_CreateWindow("Game", 50,50, 640, 480, 0);
+    m_window = SDL_CreateWindow(name.c_str(), 50,50, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     
 }
 
 EngineApp::~EngineApp(){
+    for (auto e : m_entities){
+        delete e;
+    }
+    m_entities.clear();
+    m_removeEntities.clear();
+
     for (auto text : textures){
         SDL_DestroyTexture(text.second);
     }
+    textures.clear();
+
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
 }
@@ -31,34 +39,44 @@ void EngineApp::GameLoop(){
     }
 
     while (1){
-
+        //std::cout << "\n\n\tMainloop\n";
         m_inputMap.Update();
 
         if(m_inputMap.GetQuitEvent()){
             break;
         }
 
-        // SDL_Event e;
-        // if ( SDL_PollEvent(&e) ){
-        //     if (e.type == SDL_QUIT) 
-        //         break;
-        // }
-
-        //std::cout << "test\n";
-        SDL_RenderClear(m_renderer);
-
         for (auto e : m_entities){
-            e->Update(&m_inputMap);
+            e->Update(this, 0.1f);
         }
 
-        //std::cout << "test1\n";
-        for (auto e : m_entities){
-            e->Draw(this);
-        }
-
-        SDL_RenderPresent(m_renderer);
-
+        Render();
+        RemoveEntities();
     }
+}
+
+void EngineApp::Render(){
+    // Rendering...
+    SDL_RenderClear(m_renderer);
+    for (auto e : m_entities){
+        e->Draw(this);
+    }
+    SDL_RenderPresent(m_renderer);
+}
+
+void EngineApp::RemoveEntities(){
+    for (auto rm : m_removeEntities){
+        int i=0;
+        for (auto e : m_entities){
+            if (rm == e){
+                m_entities.erase(m_entities.begin()+i);
+                delete e;
+                break;
+            }
+            i++;
+        }
+    }
+    m_removeEntities.clear();
 }
 
 SDL_Renderer* EngineApp::GetRenderer(){
@@ -69,6 +87,48 @@ void EngineApp::AddEntity(Entity* e){
     m_entities.emplace_back(e);
 }
 
+ void EngineApp::RemoveEntity(Entity* e){
+     // Entities needs to be removed in the end of the gameloop
+     m_removeEntities.emplace_back(e);
+ }
+
 InputMap* EngineApp::GetInputMap(){
     return &m_inputMap;
+}
+
+// Physics Methods
+std::vector<Entity*> EngineApp::GetCollisions(Entity* e, Layer layer){
+    std::vector<Entity*> out;
+
+    for (Entity* other : m_entities){
+        if (other->GetLayers()->Intersect(layer)){
+            if (physics::AABB(e, other)){
+               out.emplace_back(other);
+            }
+        }
+    }
+    return out;
+}
+
+bool EngineApp::Collided(Entity* e, Layer layer){
+    for (Entity* other : m_entities){
+        if (other->GetLayers()->Intersect(layer)){
+            std::cout << "testing...\n";
+            if (physics::AABB(e, other)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+Entity* EngineApp::GetFirstCollision(Entity* e, Layer layer){
+    for (Entity* other : m_entities){
+        if (other->GetLayers()->Intersect(layer)){
+            if (physics::AABB(e, other)){
+                return other;
+            }
+        }
+    }
+    return nullptr;
 }

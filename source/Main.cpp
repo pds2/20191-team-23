@@ -14,13 +14,9 @@
 #include "Engine/EngineApp.h"
 #include "Engine/GameObject.h"
 
-#define WIDTH 800
-#define HEIGHT 600
-#define IMG_PATH "exit2.png"
-
 int main (int argc, char *argv[]) {
-    EngineApp app;
-    auto inputMap = app.GetInputMap();
+    EngineApp app("Game1");
+    InputMap* inputMap = app.GetInputMap();
 
     inputMap->NewMap("upward");
     inputMap->NewMap("forward");
@@ -35,8 +31,14 @@ int main (int argc, char *argv[]) {
 
     GameObject* a = new GameObject();
     a->SetSprite("exit");
-
+    a->GetLayers()->Register(2);
     app.AddEntity(a);
+
+    GameObject* b = new GameObject();
+    b->SetSprite("exit");
+    b->GetPosition()->x += 50;
+    b->GetPosition()->y += 50;
+    app.AddEntity(b);
 
     /////////////////////////////// Game Loop ///////////////////////////////
     app.GameLoop();

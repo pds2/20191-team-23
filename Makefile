@@ -10,5 +10,6 @@ OUT=bin/app.exe
 COMPILER_FLAGS = -w -Wl,-subsystem,windows
 LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
+# $(COMPILER_FLAGS)
 all:
-	$(CC) -std=c++11 $(ENGINE) $(GAME) $(COMPILER_FLAGS) -o $(OUT) $(LINKER_FLAGS)
+	$(CC) -std=c++11 $(ENGINE) $(GAME) -o $(OUT) $(LINKER_FLAGS)

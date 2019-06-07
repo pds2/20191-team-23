@@ -11,10 +11,12 @@
 
 #include "Entity.h"
 #include "InputMap.h"
+#include "Layer.h"
+#include "Physics.h"
 
 class EngineApp{
 public:
-    EngineApp();
+    EngineApp(std::string name);
     virtual ~EngineApp();
 
     void GameLoop();
@@ -26,11 +28,21 @@ public:
     SDL_Renderer* GetRenderer();
 
     void AddEntity(Entity* e);
+    void RemoveEntity(Entity* e);
+
+    // Physics Methods
+    std::vector<Entity*> GetCollisions(Entity* e, Layer layer);
+    bool Collided(Entity* e, Layer layer);
+    Entity* GetFirstCollision(Entity* e, Layer layer);
 
     InputMap* GetInputMap();
 
 private:
+    void Render();
+    void RemoveEntities();
+
     std::vector<Entity*> m_entities;
+    std::vector<Entity*> m_removeEntities;
 
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;

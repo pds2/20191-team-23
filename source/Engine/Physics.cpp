@@ -16,9 +16,10 @@ namespace physics{
         Vector endB(b->GetPosition()->x + b->GetScale()->x, b->GetPosition()->y + b->GetScale()->y);
 
         if (Intersect(*a->GetPosition(), endA, *b->GetPosition())){
-            if (Intersect(*b->GetPosition(), endB, *a->GetPosition())){
-                return true;
-            }
+            return true;
+        }
+        if (Intersect(*b->GetPosition(), endB, *a->GetPosition())){
+            return true;
         }
         return false;
     }
