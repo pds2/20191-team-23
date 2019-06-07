@@ -23,6 +23,22 @@ Vector Vector::operator/(const int& a){
     return Vector(x/a, y/a);
 }
 
+
 bool Vector::operator==(const Vector& a){
     return x==a.x && y==a.y;
+}
+
+
+// Assignment operators
+void Vector::operator+=(const Vector& a){
+    x += a.x; y += a.y;
+}
+void Vector::operator-=(const Vector& a){
+    x -= a.x; y -= a.y;
+}
+void Vector::operator*=(const int& a){
+    x *= a; y *= a;
+}
+void Vector::operator/=(const int& a){
+    x /= a; y /= a;
 }

@@ -12,8 +12,8 @@ public:
     virtual ~GameObject();
 
     virtual void Start() override;
-    virtual void Update(EngineApp* app, float deltaTime) override;
-    virtual void Draw(EngineApp* app) override;
+    virtual void Update(EngineApp& app, float deltaTime) override;
+    virtual void Draw(EngineApp& app) override;
 
     void SetSprite(std::string name);
 

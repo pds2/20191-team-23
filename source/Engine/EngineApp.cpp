@@ -17,20 +17,21 @@ EngineApp::~EngineApp(){
     m_entities.clear();
     m_removeEntities.clear();
 
-    for (auto text : textures){
+    for (auto text : m_textures){
         SDL_DestroyTexture(text.second);
     }
-    textures.clear();
+    m_textures.clear();
 
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
+    SDL_Quit();
 }
 
 void EngineApp::LoadTexture(std::string name, std::string path){
     int w, h;
 
-    textures[name] = IMG_LoadTexture(m_renderer, path.c_str());
-    SDL_QueryTexture(textures[name], NULL, NULL, &w, &h);
+    m_textures[name] = IMG_LoadTexture(m_renderer, path.c_str());
+    SDL_QueryTexture(m_textures[name], NULL, NULL, &w, &h);
 }
 
 void EngineApp::GameLoop(){
@@ -47,7 +48,7 @@ void EngineApp::GameLoop(){
         }
 
         for (auto e : m_entities){
-            e->Update(this, 0.1f);
+            e->Update(*this, 0.1f);
         }
 
         Render();
@@ -59,7 +60,7 @@ void EngineApp::Render(){
     // Rendering...
     SDL_RenderClear(m_renderer);
     for (auto e : m_entities){
-        e->Draw(this);
+        e->Draw(*this);
     }
     SDL_RenderPresent(m_renderer);
 }
@@ -79,8 +80,13 @@ void EngineApp::RemoveEntities(){
     m_removeEntities.clear();
 }
 
-SDL_Renderer* EngineApp::GetRenderer(){
-    return m_renderer;
+void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale){
+    m_poolRect.x = position.x + m_cameraPosition.x;
+    m_poolRect.y = position.y + m_cameraPosition.y;
+    m_poolRect.w = scale.x;
+    m_poolRect.h = scale.y;
+
+    SDL_RenderCopy(m_renderer, m_textures[texture], NULL, &m_poolRect);
 }
 
 void EngineApp::AddEntity(Entity* e){
@@ -92,8 +98,16 @@ void EngineApp::AddEntity(Entity* e){
      m_removeEntities.emplace_back(e);
  }
 
-InputMap* EngineApp::GetInputMap(){
-    return &m_inputMap;
+InputMap& EngineApp::GetInputMap(){
+    return m_inputMap;
+}
+
+SDL_Renderer& EngineApp::GetRenderer(){
+    return *m_renderer;
+}
+
+Vector& EngineApp::GetCameraPosition(){
+    return m_cameraPosition;
 }
 
 // Physics Methods
@@ -101,8 +115,8 @@ std::vector<Entity*> EngineApp::GetCollisions(Entity* e, Layer layer){
     std::vector<Entity*> out;
 
     for (Entity* other : m_entities){
-        if (other->GetLayers()->Intersect(layer)){
-            if (physics::AABB(e, other)){
+        if (other->GetLayers().Intersect(layer)){
+            if (physics::AABB(*e, *other)){
                out.emplace_back(other);
             }
         }
@@ -112,8 +126,8 @@ std::vector<Entity*> EngineApp::GetCollisions(Entity* e, Layer layer){
 
 bool EngineApp::Collided(Entity* e, Layer layer){
     for (Entity* other : m_entities){
-        if (other->GetLayers()->Intersect(layer)){
-            if (physics::AABB(e, other)){
+        if (other->GetLayers().Intersect(layer)){
+            if (physics::AABB(*e, *other)){
                 return true;
             }
         }
@@ -123,8 +137,8 @@ bool EngineApp::Collided(Entity* e, Layer layer){
 
 Entity* EngineApp::GetFirstCollision(Entity* e, Layer layer){
     for (Entity* other : m_entities){
-        if (other->GetLayers()->Intersect(layer)){
-            if (physics::AABB(e, other)){
+        if (other->GetLayers().Intersect(layer)){
+            if (physics::AABB(*e, *other)){
                 return other;
             }
         }

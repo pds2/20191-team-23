@@ -11,14 +11,14 @@ static bool Intersect(Vector& a, Vector& endA, Vector& b){
 }
 
 namespace physics{
-    bool AABB(Entity* a, Entity* b){
-        Vector endA = *a->GetPosition() + *a->GetScale();
-        Vector endB = *b->GetPosition() + *b->GetScale();
+    bool AABB(Entity& a, Entity& b){
+        Vector endA = a.GetPosition() + a.GetScale();
+        Vector endB = b.GetPosition() + b.GetScale();
 
-        if (Intersect(*a->GetPosition(), endA, *b->GetPosition())){
+        if (Intersect(a.GetPosition(), endA, b.GetPosition())){
             return true;
         }
-        if (Intersect(*b->GetPosition(), endB, *a->GetPosition())){
+        if (Intersect(b.GetPosition(), endB, a.GetPosition())){
             return true;
         }
         return false;

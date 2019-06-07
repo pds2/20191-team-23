@@ -9,7 +9,14 @@ struct Vector{
     Vector operator-(const Vector& a);
     Vector operator*(const int& a);
     Vector operator/(const int& a);
+
     bool operator==(const Vector& a);
+
+    // Assignment operators
+    void operator+=(const Vector& a);
+    void operator-=(const Vector& a);
+    void operator*=(const int& a);
+    void operator/=(const int& a);
 
     float x;
     float y;

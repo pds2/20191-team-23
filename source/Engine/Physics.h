@@ -4,7 +4,7 @@
 class Entity;
 
 namespace physics{
-    bool AABB(Entity* a, Entity* b);
+    bool AABB(Entity& a, Entity& b);
 } // namespace physics
 
 

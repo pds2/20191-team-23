@@ -23,9 +23,7 @@ public:
 
     void LoadTexture(std::string name, std::string path);
 
-    std::unordered_map<std::string, SDL_Texture*> textures;
-
-    SDL_Renderer* GetRenderer();
+    void DrawSprite(std::string& texture, Vector& position, Vector& scale);
 
     void AddEntity(Entity* e);
     void RemoveEntity(Entity* e);
@@ -35,19 +33,28 @@ public:
     bool Collided(Entity* e, Layer layer);
     Entity* GetFirstCollision(Entity* e, Layer layer);
 
-    InputMap* GetInputMap();
+    //
+    InputMap& GetInputMap();
+    SDL_Renderer& GetRenderer();
+
+    Vector& GetCameraPosition();
 
 private:
     void Render();
     void RemoveEntities();
 
+    Vector m_cameraPosition;
+
     std::vector<Entity*> m_entities;
     std::vector<Entity*> m_removeEntities;
+    std::unordered_map<std::string, SDL_Texture*> m_textures;
 
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
 
     InputMap m_inputMap;
+
+    SDL_Rect m_poolRect;
 };
 
 #endif // !ENGINE_APP_H

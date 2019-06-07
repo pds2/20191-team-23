@@ -16,28 +16,27 @@
 
 int main (int argc, char *argv[]) {
     EngineApp app("Game1");
-    InputMap* inputMap = app.GetInputMap();
+    InputMap& inputMap = app.GetInputMap();
 
-    inputMap->NewMap("upward");
-    inputMap->NewMap("forward");
-    inputMap->BindKey("upward", KEY_W, 1.0f);
-    inputMap->BindKey("upward", KEY_S, -1.0f);
-    inputMap->BindKey("forward", KEY_A, -1.0f);
-    inputMap->BindKey("forward", KEY_D, 1.0f);
+    inputMap.NewMap("upward");
+    inputMap.NewMap("forward");
+    inputMap.BindKey("upward", KEY_W, 1.0f);
+    inputMap.BindKey("upward", KEY_S, -1.0f);
+    inputMap.BindKey("forward", KEY_A, -1.0f);
+    inputMap.BindKey("forward", KEY_D, 1.0f);
 
 
 
-    app.LoadTexture("exit", "exit2.png");
+    app.LoadTexture("character", "../assets/exit2.png");
 
     GameObject* a = new GameObject();
-    a->SetSprite("exit");
-    a->GetLayers()->Register(2);
+    a->SetSprite("character");
+    a->GetLayers().Register(2);
     app.AddEntity(a);
 
     GameObject* b = new GameObject();
-    b->SetSprite("exit");
-    b->GetPosition()->x += 50;
-    b->GetPosition()->y += 50;
+    b->SetSprite("character");
+    b->GetPosition() += Vector(50.0f, 50.0f);
     app.AddEntity(b);
 
     /////////////////////////////// Game Loop ///////////////////////////////
