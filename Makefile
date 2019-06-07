@@ -1,6 +1,7 @@
 CC=g++
-ENGINE=source/Engine/*.cpp
-GAME=source/*.cpp
+ENGINE=source/engine/*.cpp
+GAME=source/game/*.cpp source/*.cpp
+#GAME=source/*.cpp
 
 OUT=bin/app.exe
 

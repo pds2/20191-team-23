@@ -16,10 +16,10 @@ Vector Vector::operator+(const Vector& a){
 Vector Vector::operator-(const Vector& a){
     return Vector(x-a.x, y-a.y);
 }
-Vector Vector::operator*(const int& a){
+Vector Vector::operator*(const float& a){
     return Vector(x*a, y*a);
 }
-Vector Vector::operator/(const int& a){
+Vector Vector::operator/(const float& a){
     return Vector(x/a, y/a);
 }
 
@@ -36,9 +36,9 @@ void Vector::operator+=(const Vector& a){
 void Vector::operator-=(const Vector& a){
     x -= a.x; y -= a.y;
 }
-void Vector::operator*=(const int& a){
+void Vector::operator*=(const float& a){
     x *= a; y *= a;
 }
-void Vector::operator/=(const int& a){
+void Vector::operator/=(const float& a){
     x /= a; y /= a;
 }

@@ -19,7 +19,7 @@ void GameObject::Start(){
 }
 
 void GameObject::Update(EngineApp& app, float deltaTime){
-    InputMap& inputMap = app.GetInputMap();
+    /*InputMap& inputMap = app.GetInputMap();
 
     
     if (!m_layer.Intersect(2)){
@@ -30,11 +30,11 @@ void GameObject::Update(EngineApp& app, float deltaTime){
         if (out){
             std::cout << "Working!\n";
         }
-    }
+    }*/
 }
 
 void GameObject::Draw(EngineApp& app){
-    app.DrawSprite(m_spriteName, position, scale);
+    app.DrawSprite(m_spriteName, position, scale, false);
 }
 
  void GameObject::SetSprite(std::string name){

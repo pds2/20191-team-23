@@ -11,6 +11,7 @@ This project is a basic 2D game engine with a basic platformer game. The main go
 The following libraries are needed in order to compile the code:
 - [SDL2](https://www.libsdl.org/download-2.0.php)
 - [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
+
 The links provided includes the development libraries needed for **Mac OS X** and **Windows**.
 If you are using a **Linux** distribution, you can get the dev version of the libraries using **apt-get**:
 ```
@@ -32,6 +33,7 @@ The Entity class (interface for the objects) includes a Start, Update and Draw m
 - The **Start** method is called when the entity is registered in the EngineApp, ideal to initialize the logic.
 - The **Update** method is called every logic frame.
 - The **Draw** method is called every render frame.
+
 You can add a new Entity by calling:
 ```cpp
     app.AddEntity(new GameObject()); // GameObject inherits Entity

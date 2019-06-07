@@ -39,8 +39,17 @@ void EngineApp::GameLoop(){
         e->Start();
     }
 
+    // Delta Time
+    Uint64 dtNow = SDL_GetPerformanceCounter();
+    Uint64 dtLast = 0;
+    float deltaTime = 0.0f;
+
     while (1){
-        //std::cout << "\n\n\tMainloop\n";
+        dtLast = dtNow;
+        dtNow = SDL_GetPerformanceCounter();
+        deltaTime = (float)((dtNow-dtLast)*1000.0 / (float)SDL_GetPerformanceFrequency());// * 0.001f;
+        //std::cout << "Delta Time: " << deltaTime << "s"<< std::endl;
+
         m_inputMap.Update();
 
         if(m_inputMap.GetQuitEvent()){
@@ -48,7 +57,7 @@ void EngineApp::GameLoop(){
         }
 
         for (auto e : m_entities){
-            e->Update(*this, 0.1f);
+            e->Update(*this, deltaTime);
         }
 
         Render();
@@ -80,13 +89,20 @@ void EngineApp::RemoveEntities(){
     m_removeEntities.clear();
 }
 
-void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale){
+void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale, bool flip){
     m_poolRect.x = position.x + m_cameraPosition.x;
     m_poolRect.y = position.y + m_cameraPosition.y;
     m_poolRect.w = scale.x;
     m_poolRect.h = scale.y;
 
-    SDL_RenderCopy(m_renderer, m_textures[texture], NULL, &m_poolRect);
+    SDL_RendererFlip rFlip = SDL_FLIP_NONE;
+    if (flip){
+        rFlip = SDL_FLIP_HORIZONTAL;
+    }
+
+
+    //SDL_RenderCopy(m_renderer, m_textures[texture], NULL, &m_poolRect);
+    SDL_RenderCopyEx(m_renderer, m_textures[texture], NULL, &m_poolRect, 0.0, NULL, rFlip);
 }
 
 void EngineApp::AddEntity(Entity* e){

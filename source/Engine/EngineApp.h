@@ -23,7 +23,7 @@ public:
 
     void LoadTexture(std::string name, std::string path);
 
-    void DrawSprite(std::string& texture, Vector& position, Vector& scale);
+    void DrawSprite(std::string& texture, Vector& position, Vector& scale, bool flip);
 
     void AddEntity(Entity* e);
     void RemoveEntity(Entity* e);

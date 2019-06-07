@@ -17,9 +17,9 @@ public:
 
     void SetSprite(std::string name);
 
-private:
+protected:
     std::string m_spriteName;
-    SDL_Rect m_rect;
+private:
 };
 
 #endif // !GAME_OBJECT_H
