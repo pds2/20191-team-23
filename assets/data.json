@@ -15,5 +15,18 @@
     "bg1": "map/Visual-Background.png",
     "bg2": "map/Block-background.png",
     "bullet": "map/Visual-lamp.png"
+  },
+  "inputMaps":{
+    "forward":{
+      "KEY_D": 1.0,
+      "KEY_A": -1.0
+    },
+    "upward":{
+      "KEY_W": 1.0,
+      "KEY_S": -1.0
+    },
+    "shoot":{
+      "KEY_SPACE": 1.0
+    }
   }
 }  

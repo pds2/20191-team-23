@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include "InputNames.h"
+
 // To parse the .json file
 #include "../../extern/include/RSJparser.tcc"
 
@@ -44,6 +46,15 @@ void EngineApp::LoadJson(std::string path){
 
     for (auto it : data["textures"].as_map<std::string>()){
         LoadTexture(it.first, path + it.second);
+    }
+
+    for (auto it : data["inputMaps"].as_map<RSJresource>()){
+        m_inputMap.NewMap(it.first);
+        //std::cout << "New Map: " << it.first <<std::endl;
+        for (auto map : it.second.as_map<double>()){
+            m_inputMap.BindKey(it.first, InputNamesStr[map.first], (float)map.second);
+            //std::cout << "\tNew Key: " << map.first << ", value: " << value <<std::endl;
+        }
     }
 
     ifs.close();

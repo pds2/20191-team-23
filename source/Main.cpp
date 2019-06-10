@@ -35,18 +35,6 @@ int main (int argc, char *argv[]) {
     EngineApp app("Game1");
     InputMap& inputMap = app.GetInputMap();
 
-    // Keyboard Maps
-    inputMap.NewMap("forward");
-    inputMap.BindKey("forward", KEY_A, -1.0f);
-    inputMap.BindKey("forward", KEY_D, 1.0f);
-
-    inputMap.NewMap("upward");
-    inputMap.BindKey("upward", KEY_S, -1.0f);
-    inputMap.BindKey("upward", KEY_W, 1.0f);
-
-    inputMap.NewMap("shoot");
-    inputMap.BindKey("shoot", KEY_SPACE, 1.0f);
-
     // The json file
     app.LoadJson("../assets/");
 
