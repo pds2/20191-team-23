@@ -18,24 +18,10 @@
 #include "game/Player.h"
 #include "game/Enemy.h"
 
-const int map[10][20] = {
-                     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                     };
-
 int main (int argc, char *argv[]) {
-    EngineApp app("Game1");
-    InputMap& inputMap = app.GetInputMap();
+    EngineApp app("Test Game");
 
-    // The json file
+    // The json Data file
     app.LoadJson("../assets/");
 
     // The map
@@ -43,11 +29,6 @@ int main (int argc, char *argv[]) {
         for (int y=0; y<20; y++){
             GameObject* obj = new GameObject();
             obj->GetPosition() += Vector(y*100, x*100);
-            /*if (map[x][y] == 1){
-                obj->SetSprite("bg1");
-            } else{
-                obj->SetSprite("bg2");
-            }*/
              obj->SetSprite("bg2");
             app.AddEntity(obj);
         }    
