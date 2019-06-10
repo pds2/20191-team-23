@@ -47,31 +47,8 @@ int main (int argc, char *argv[]) {
     inputMap.NewMap("shoot");
     inputMap.BindKey("shoot", KEY_SPACE, 1.0f);
 
-
-    // Character Textures
-    app.LoadTexture("c_idle_1", "../assets/character/Guy-Weapon-idle1.png");
-    app.LoadTexture("c_idle_2", "../assets/character/Guy-Weapon-idle2.png");
-
-    app.LoadTexture("c_walk_1", "../assets/character/Guy-Weapon-walk1.png");
-    app.LoadTexture("c_walk_2", "../assets/character/Guy-Weapon-walk2.png");
-    app.LoadTexture("c_walk_3", "../assets/character/Guy-Weapon-walk3.png");
-    app.LoadTexture("c_walk_4", "../assets/character/Guy-Weapon-walk4.png");
-
-    // Cop textures
-    app.LoadTexture("cop_idle_1", "../assets/character/Cop-idle1.png");
-    app.LoadTexture("cop_idle_2", "../assets/character/Cop-idle2.png");
-
-    app.LoadTexture("cop_walk_1", "../assets/character/Cop-walk1.png");
-    app.LoadTexture("cop_walk_2", "../assets/character/Cop-walk2.png");
-    app.LoadTexture("cop_walk_3", "../assets/character/Cop-walk3.png");
-    app.LoadTexture("cop_walk_4", "../assets/character/Cop-walk4.png");
-
-    // Level
-    app.LoadTexture("bg1", "../assets/Visual-Background.png");
-    app.LoadTexture("bg2", "../assets/Block-background.png");
-
-    // Bullet
-    app.LoadTexture("bullet", "../assets/Visual-lamp.png");
+    // The json file
+    app.LoadJson("../assets/");
 
     // The map
     for (int x=0; x<10; x++){

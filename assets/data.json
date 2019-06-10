@@ -1,0 +1,19 @@
+{
+  "textures":{
+    "c_idle_1": "character/Guy-Weapon-idle1.png",
+    "c_idle_2": "character/Guy-Weapon-idle2.png",
+    "c_walk_1": "character/Guy-Weapon-walk1.png",
+    "c_walk_2": "character/Guy-Weapon-walk2.png",
+    "c_walk_3": "character/Guy-Weapon-walk3.png",
+    "c_walk_4": "character/Guy-Weapon-walk4.png",
+    "cop_idle_1": "character/Cop-idle1.png",
+    "cop_idle_2": "character/Cop-idle2.png",
+    "cop_walk_1": "character/Cop-walk1.png",
+    "cop_walk_2": "character/Cop-walk2.png",
+    "cop_walk_3": "character/Cop-walk3.png",
+    "cop_walk_4": "character/Cop-walk4.png",
+    "bg1": "map/Visual-Background.png",
+    "bg2": "map/Block-background.png",
+    "bullet": "map/Visual-lamp.png"
+  }
+}  
