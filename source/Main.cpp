@@ -44,6 +44,9 @@ int main (int argc, char *argv[]) {
     inputMap.BindKey("upward", KEY_S, -1.0f);
     inputMap.BindKey("upward", KEY_W, 1.0f);
 
+    inputMap.NewMap("shoot");
+    inputMap.BindKey("shoot", KEY_SPACE, 1.0f);
+
 
     // Character Textures
     app.LoadTexture("c_idle_1", "../assets/character/Guy-Weapon-idle1.png");
@@ -66,6 +69,9 @@ int main (int argc, char *argv[]) {
     // Level
     app.LoadTexture("bg1", "../assets/Visual-Background.png");
     app.LoadTexture("bg2", "../assets/Block-background.png");
+
+    // Bullet
+    app.LoadTexture("bullet", "../assets/Visual-lamp.png");
 
     // The map
     for (int x=0; x<10; x++){

@@ -1,8 +1,13 @@
 #include "Enemy.h"
 
+#include <cstdlib>
+
+#include "Constants.h"
+
 #include "../engine/EngineApp.h"
 
 Enemy::Enemy(){
+    m_layer.Register(ENEMY_LAYER);
     scale = Vector(100.0f, 100.0f);
 
     m_sIdle.Configure("cop_idle_", 2, 2);
