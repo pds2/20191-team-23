@@ -19,14 +19,14 @@ It is possible to:
 - Each object has a update function that can be overwritten to add game logics like "AI", character mechanics, etc;
 - Change camera Ortographic Scale;
 - Move camera;
-- Scale game window;
+- Resize game window;
 - Use vectors and easy-to-use vector maths;
 - Use a overwriteable Draw function for each object.
 
 The project includes a quick demonstration, in which is possible to:
 - See multiple characters on the screen at the same time;
 - See a little "AI" for enemies;
-- Walk 360º;
+- Walk in all directions;
 - Shoot and kill enemies;
 - See different characters being drawn on the screen and their movements.
 
