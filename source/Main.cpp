@@ -18,6 +18,9 @@
 #include "game/Player.h"
 #include "game/Enemy.h"
 
+#define MAP_TILE_X 22
+#define MAP_TILE_Y 22
+
 int main (int argc, char *argv[]) {
     EngineApp app("Test Game");
 
@@ -25,8 +28,8 @@ int main (int argc, char *argv[]) {
     app.LoadJson("../assets/");
 
     // The map
-    for (int x=0; x<10; x++){
-        for (int y=0; y<20; y++){
+    for (int x=0; x<MAP_TILE_X; x++){
+        for (int y=0; y<MAP_TILE_Y; y++){
             GameObject* obj = new GameObject();
             obj->GetPosition() += Vector(y*100, x*100);
              obj->SetSprite("bg2");
