@@ -7,6 +7,30 @@ This project is a basic 2D game engine with a basic platformer game. The main go
 - Provide Vector and basic physics math.
 - Provide some interface and base classes to write custom game objects to build the game. 
 
+# User Stories
+The user expects to be able to create a simple, albeit complete and scalable 2D game with this engine.
+It is possible to:
+- Add images;
+- Create sprites with multiple images (also available via JSON);
+- Add movement and map it to keyboard inputs (also available via JSON);
+- Provide custom images for game map, characters;
+- Add characters and enemy "AI";
+- Acess informations inside Game Loop;
+- Each object has a update function that can be overwritten to add game logics like "AI", character mechanics, etc;
+- Changeable camera Ortographic Scale;
+- Moveable camera;
+- Scalable game window;
+- Use vectors and easy-to-use vector maths;
+- Use a overwriteable Draw function for each object.
+
+The project includes a quick demonstration, in which is possible to:
+- See multiple characters on the screen at the same time;
+- See a little "AI" for enemies;
+- Walk 360º;
+- Shoot and kill enemies;
+- See different characters being drawn on the screen and their movements.
+
+
 # How to Compile the Code
 The following libraries are needed in order to compile the code:
 - [SDL2](https://www.libsdl.org/download-2.0.php)
@@ -18,7 +42,17 @@ If you are using a **Linux** distribution, you can get the dev version of the li
 sudo apt-get install libsdl2-dev
 sudo apt-get install libsdl2-image-dev
 ```
-Once you installed the libraries, use the **make** command to call the Makefile. The binary output will appear in the **bin/** folder.
+
+# How to install
+- Once you installed the libraries, use the **make** command to call the Makefile. 
+- **ONLY IN LINUX** this command will also create a folder called **bin/**.
+- - In Windows, the user needs to manually create an empty folder with the same name ("**bin/**"), inside the project's root folder, **before** running **make** command.
+
+The binary output will appear in the **bin/** folder. Access it to **run a demonstration** of what's possible with this engine.
+
+# How to play the demonstration
+- Walk: **WSAD**;
+- Shoot: **space bar**.
 
 # How the Engine Works (basics)
 The EngineApp class is the main class that controls everything. To start using the engine, just include it in the main code, create an instance and call the gameloop when you want to start running the game:
