@@ -5,9 +5,12 @@ struct Vector{
     Vector();
     Vector(float a, float b);
 
-    float Length(); //retorna o tamanho do vetor, aka sqrt(x*x+y*y
-    void Normalize(); //normaliza o vetor, aka divide x e y pelo length
-    Vector Normalized(); //retorna uma copia do vetor soq normalizado
+    //returns vector size (sqrt(x*x+y*y)) 
+    float Length();
+    //normalizes the vector (divides x and y by lenght)
+    void Normalize(); 
+    //returns a normelized copy of the vector
+    Vector Normalized();
 
     Vector operator+(const Vector& a);
     Vector operator-(const Vector& a);
