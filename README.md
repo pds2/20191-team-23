@@ -23,7 +23,7 @@ It is possible to:
 - Use vectors and easy-to-use vector maths;
 - Use a overwriteable Draw function for each object.
 
-The project includes a quick demonstration, in which is possible to:
+The project includes a quick demonstration, in which it is possible to:
 - See multiple characters on the screen at the same time;
 - See a little "AI" for enemies;
 - Walk in all directions;
