@@ -1,4 +1,5 @@
 #include "Vector.h"
+#include "cmath"
 
 Vector::Vector(){
     x = 0.0f;
@@ -8,6 +9,26 @@ Vector::Vector(){
 Vector::Vector(float a, float b){
     x = a;
     y = b;
+}
+
+float Vector::Length(){
+    return sqrt(x*x+y*y);
+}
+
+void Vector::Normalize(){
+    float l = Length();
+    if (l > 0.0f){
+        x /= l;
+        y /= l;
+    }
+}
+
+Vector Vector::Normalized(){
+    float l = Length();
+    if (l > 0.0f){
+        return Vector(x/l, y/l);
+    }
+    return Vector(0.0f, 0.0f);
 }
 
 Vector Vector::operator+(const Vector& a){

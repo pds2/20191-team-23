@@ -5,7 +5,8 @@ GAME=source/game/*.cpp source/*.cpp
 
 OUT=bin/app.exe
 
-LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+#LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+LINKER_FLAGS = -lSDL2main -lSDL2 -lSDL2_image
 
 #INCLUDE_PATH= -IC:\extern\win64\include
 #LIB_PATH= -LC:\extern\win64\lib
