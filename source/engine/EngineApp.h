@@ -39,12 +39,16 @@ public:
     SDL_Renderer& GetRenderer();
 
     Vector& GetCameraPosition();
+    Vector& GetWindowSize();
 
 private:
     void Render();
-    void RemoveEntities();
+    void RemoveQueuedEntities();
+
+    void UpdateWindowSize();
 
     Vector m_cameraPosition;
+    Vector m_windowSize; // Updated every frame
 
     std::vector<Entity*> m_entities;
     std::vector<Entity*> m_removeEntities;

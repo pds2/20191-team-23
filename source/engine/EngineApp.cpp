@@ -68,10 +68,6 @@ void EngineApp::LoadTexture(std::string name, std::string path){
 }
 
 void EngineApp::GameLoop(){
-    for (auto e : m_entities){
-        e->Start();
-    }
-
     // Delta Time
     Uint64 dtNow = SDL_GetPerformanceCounter();
     Uint64 dtLast = 0;
@@ -83,6 +79,7 @@ void EngineApp::GameLoop(){
         deltaTime = (float)((dtNow-dtLast)*1000.0 / (float)SDL_GetPerformanceFrequency());// * 0.001f;
         //std::cout << "Delta Time: " << deltaTime << "s"<< std::endl;
 
+        UpdateWindowSize();
         m_inputMap.Update();
 
         if(m_inputMap.GetQuitEvent()){
@@ -94,7 +91,7 @@ void EngineApp::GameLoop(){
         }
 
         Render();
-        RemoveEntities();
+        RemoveQueuedEntities();
     }
 }
 
@@ -107,7 +104,7 @@ void EngineApp::Render(){
     SDL_RenderPresent(m_renderer);
 }
 
-void EngineApp::RemoveEntities(){
+void EngineApp::RemoveQueuedEntities(){
     for (auto rm : m_removeEntities){
         int i=0;
         for (auto e : m_entities){
@@ -122,6 +119,12 @@ void EngineApp::RemoveEntities(){
     m_removeEntities.clear();
 }
 
+void EngineApp::UpdateWindowSize(){
+    int x,y;
+    SDL_GetWindowSize(m_window, &x, &y);
+    m_windowSize = Vector(x, y);
+}
+
 void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale, bool flip){
     m_poolRect.x = position.x + m_cameraPosition.x;
     m_poolRect.y = position.y + m_cameraPosition.y;
@@ -133,12 +136,12 @@ void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale
         rFlip = SDL_FLIP_HORIZONTAL;
     }
 
-
     //SDL_RenderCopy(m_renderer, m_textures[texture], NULL, &m_poolRect);
     SDL_RenderCopyEx(m_renderer, m_textures[texture], NULL, &m_poolRect, 0.0, NULL, rFlip);
 }
 
 void EngineApp::AddEntity(Entity* e){
+    e->Start();
     m_entities.emplace_back(e);
 }
 
@@ -157,6 +160,10 @@ SDL_Renderer& EngineApp::GetRenderer(){
 
 Vector& EngineApp::GetCameraPosition(){
     return m_cameraPosition;
+}
+
+Vector& EngineApp::GetWindowSize(){
+    return m_windowSize;
 }
 
 // Physics Methods
