@@ -23,8 +23,8 @@ void Player::Update(EngineApp& app, float deltaTime){
     float valueX = app.GetInputMap().GetValue("forward");
     float valueY = app.GetInputMap().GetValue("upward");
 
-    position.x += valueX * m_walkSpeed * deltaTime;
-    position.y -= valueY * m_walkSpeed * deltaTime;
+    Vector mov(valueX, -valueY);
+    position += mov.Normalized() * m_walkSpeed * deltaTime;
 
     // Configuring the sprites...
     m_walking = (valueX != 0.0f || valueY != 0.0f);
@@ -36,10 +36,9 @@ void Player::Update(EngineApp& app, float deltaTime){
     if (app.GetInputMap().Pressed("shoot")){
         float dX = m_spriteFlip ? -1.0f : 1.0f;
         Bullet* b = new Bullet(ENEMY_LAYER);
-        b->direction = Vector(dX, -valueY);
+        b->direction = Vector(dX, -valueY).Normalized();
         b->GetPosition() = position + (scale/3.0f);
         app.AddEntity(b);
-        //std::cout << "Shoot!\n";
     }
 
     // Updating the sprite timers

@@ -28,7 +28,9 @@ Enemy::~Enemy(){
 void Enemy::RandomizeState(){
     m_fsm = rand()%2;
     m_direction = Vector(rand()%3-1, rand()%3-1);
-    if (m_direction.x == 0.0f && m_direction.y == 0.0f){
+    m_direction.Normalize();
+    
+    if (m_direction.Length() == 0.0f){
         m_fsm = 0;
     }
 }
