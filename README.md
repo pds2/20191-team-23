@@ -17,9 +17,9 @@ It is possible to:
 - Add characters and enemy "AI";
 - Acess informations inside Game Loop;
 - Each object has a update function that can be overwritten to add game logics like "AI", character mechanics, etc;
-- Changeable camera Ortographic Scale;
-- Moveable camera;
-- Scalable game window;
+- Change camera Ortographic Scale;
+- Move camera;
+- Scale game window;
 - Use vectors and easy-to-use vector maths;
 - Use a overwriteable Draw function for each object.
 
