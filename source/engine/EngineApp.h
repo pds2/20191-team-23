@@ -41,6 +41,8 @@ public:
     Vector& GetCameraPosition();
     Vector& GetWindowSize();
 
+    void SetOrthographicScale(float scale);
+
 private:
     void Render();
     void RemoveQueuedEntities();
@@ -49,6 +51,7 @@ private:
 
     Vector m_cameraPosition;
     Vector m_windowSize; // Updated every frame
+    float m_orthoScale;
 
     std::vector<Entity*> m_entities;
     std::vector<Entity*> m_removeEntities;

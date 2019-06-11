@@ -11,6 +11,8 @@
 
 #define JSON_NAME "data.json"
 
+#define assert(x) 
+
 EngineApp::EngineApp(std::string name){
     // INit SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -18,7 +20,7 @@ EngineApp::EngineApp(std::string name){
 
     m_window = SDL_CreateWindow(name.c_str(), 50,50, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-    
+    m_orthoScale = 900.0f;
 }
 
 EngineApp::~EngineApp(){
@@ -126,10 +128,11 @@ void EngineApp::UpdateWindowSize(){
 }
 
 void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale, bool flip){
-    m_poolRect.x = position.x + m_cameraPosition.x;
-    m_poolRect.y = position.y + m_cameraPosition.y;
-    m_poolRect.w = scale.x;
-    m_poolRect.h = scale.y;
+    float factor = m_windowSize.x / m_orthoScale;
+    m_poolRect.x = (position.x + m_cameraPosition.x) * factor;
+    m_poolRect.y = (position.y + m_cameraPosition.y) * factor;
+    m_poolRect.w = (scale.x) * factor;
+    m_poolRect.h = (scale.y) * factor;
 
     SDL_RendererFlip rFlip = SDL_FLIP_NONE;
     if (flip){
@@ -164,6 +167,11 @@ Vector& EngineApp::GetCameraPosition(){
 
 Vector& EngineApp::GetWindowSize(){
     return m_windowSize;
+}
+
+void EngineApp::SetOrthographicScale(float scale){
+    assert(scale > 1.0f);
+    m_orthoScale = scale;
 }
 
 // Physics Methods
