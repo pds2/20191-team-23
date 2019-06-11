@@ -1,17 +1,29 @@
 CC=g++
 ENGINE=source/engine/*.cpp
 GAME=source/game/*.cpp source/*.cpp
-#GAME=source/*.cpp
 
-OUT=bin/app.exe
+WIN_OUT=bin/app.exe
+LIN_OUT=bin/app
 
-#LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
-LINKER_FLAGS = -lSDL2main -lSDL2 -lSDL2_image
+FLAGS = -lSDL2main -lSDL2 -lSDL2_image
 
-#INCLUDE_PATH= -IC:\extern\win64\include
-#LIB_PATH= -LC:\extern\win64\lib
-#COMPILER_FLAGS = -w -Wl,-subsystem,windows
-# $(COMPILER_FLAGS)
+LINKER_FLAGS :=
+OUT := 
+BUILD_SETUP :=
+
+ifeq ($(OS), Windows_NT)
+	LINKER_FLAGS += -lmingw32 $(FLAGS)
+	# -w -Wl,-subsystem,windows
+	OUT += $(WIN_OUT)
+	#BUILD_SETUP += if not exists %cd%+"bin" mkdir %cd%+"bin"
+else
+	LINKER_FLAGS += $(FLAGS)
+	OUT += $(LIN_OUT)
+	#BUILD_SETUP += sudo apt-get install libsdl2-dev libsdl2-image-dev
+	BUILD_SETUP += mkdir -p bin
+endif
+
 
 all:
+	$(BUILD_SETUP)
 	$(CC) -std=c++11 $(ENGINE) $(GAME) -o $(OUT) $(LINKER_FLAGS)
