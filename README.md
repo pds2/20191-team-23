@@ -1,10 +1,10 @@
 # Basic 2D Game Engine
 #### 20191-team-23
 
-This project is a basic 2D game engine with a basic platformer game. The main goals of the game engine is:
-- Create something easy to use and reuse in different cases (different types of 2D games).
-- Provide a basic Game Engine Application with a gameloop and image rendering methods.
-- Provide Vector and basic physics math.
+This project is a basic 2D game engine with a basic platformer game. The main goals of the game engine are to:
+- Create something easy to use and reuse in different cases (different types of 2D games);
+- Provide a basic Game Engine Application with a gameloop and image rendering methods;
+- Provide Vector and basic physics math;
 - Provide some interface and base classes to write custom game objects to build the game. 
 
 # User Stories
@@ -36,7 +36,7 @@ The following libraries are needed in order to compile the code:
 - [SDL2](https://www.libsdl.org/download-2.0.php)
 - [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 
-The links provided includes the development libraries needed for **Mac OS X** and **Windows**.
+The links provided include the development libraries needed for **Mac OS X** and **Windows**.
 If you are using a **Linux** distribution, you can get the dev version of the libraries using **apt-get**:
 ```
 sudo apt-get install libsdl2-dev
@@ -44,7 +44,7 @@ sudo apt-get install libsdl2-image-dev
 ```
 
 # How to install
-- Once you installed the libraries, use the **make** command to call the Makefile. 
+- Once you've installed the libraries, use the **make** command to call the Makefile. 
 - **ONLY IN LINUX** this command will also create a folder called **bin/**.
 - - In Windows, the user needs to manually create an empty folder with the same name ("**bin/**"), inside the project's root folder, **before** running **make** command.
 
