@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 #include "InputNames.h"
 
@@ -131,8 +132,8 @@ void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale
     float factor = m_windowSize.x / m_orthoScale;
     m_poolRect.x = (position.x + m_cameraPosition.x) * factor;
     m_poolRect.y = (position.y + m_cameraPosition.y) * factor;
-    m_poolRect.w = (scale.x) * factor;
-    m_poolRect.h = (scale.y) * factor;
+    m_poolRect.w = abs(scale.x) * factor;
+    m_poolRect.h = abs(scale.y) * factor;
 
     SDL_RendererFlip rFlip = SDL_FLIP_NONE;
     if (flip){

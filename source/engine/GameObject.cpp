@@ -35,6 +35,7 @@ void GameObject::Update(EngineApp& app, float deltaTime){
 
 void GameObject::Draw(EngineApp& app){
     app.DrawSprite(m_spriteName, position, scale, false);
+    //tratar escala negativa
 }
 
  void GameObject::SetSprite(std::string name){
