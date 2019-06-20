@@ -135,6 +135,9 @@ void EngineApp::DrawSprite(std::string& texture, Vector& position, Vector& scale
     m_poolRect.w = abs(scale.x) * factor;
     m_poolRect.h = abs(scale.y) * factor;
 
+    if (scale.x < 0.0) throw std::invalid_argument("scale.x was negative and thus converted to positive");
+    if (scale.y < 0.0) throw std::invalid_argument("scale.y was negative and thus converted to positive");
+
     SDL_RendererFlip rFlip = SDL_FLIP_NONE;
     if (flip){
         rFlip = SDL_FLIP_HORIZONTAL;

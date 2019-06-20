@@ -44,11 +44,15 @@ sudo apt-get install libsdl2-image-dev
 ```
 
 # How to install
-- Once you've installed the libraries, use the **make** command to call the Makefile. 
+- Once you've installed the libraries, use the **make test** command to call the Makefile. It may take a few seconds to compile the whole code.
 - **ONLY IN LINUX** this command will also create a folder called **bin/**.
-- - In Windows, the user needs to manually create an empty folder with the same name ("**bin/**"), inside the project's root folder, **before** running **make** command.
+- - In Windows, the user needs to manually create an empty folder with the same name ("**bin/**"), inside the project's root folder, **before** running **make test** command.
 
 The binary output will appear in the **bin/** folder. Access it to **run a demonstration** of what's possible with this engine.
+
+# How to test the code
+- Tests were made only for the Vector class;
+- To **run the test**, type **"./tests/tests.exe"** (without "").
 
 # How to play the demonstration
 - Walk: **WSAD**;
